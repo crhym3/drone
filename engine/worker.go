@@ -18,9 +18,6 @@ var (
 	// default argument to invoke build steps
 	DefaultBuildArgs = []string{"--pull", "--cache", "--clone", "--build", "--deploy"}
 
-	// default argument to invoke build steps
-	DefaultPullRequestArgs = []string{"--pull", "--cache", "--clone", "--build"}
-
 	// default arguments to invoke notify steps
 	DefaultNotifyArgs = []string{"--pull", "--notify"}
 )
@@ -39,10 +36,8 @@ func newWorker(client dockerclient.Client) *worker {
 func (w *worker) Build(name string, stdin []byte, pr bool) (_ int, err error) {
 	// the command line arguments passed into the
 	// build agent container.
-	args := DefaultBuildArgs
-	if pr {
-		args = DefaultPullRequestArgs
-	}
+	args := make([]string, len(DefaultBuildArgs))
+	copy(args, DefaultBuildArgs)
 	args = append(args, "--")
 	args = append(args, string(stdin))
 
