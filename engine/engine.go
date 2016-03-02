@@ -288,10 +288,8 @@ func (e *engine) runJob(c context.Context, r *Task, updater *updater, client doc
 	}
 
 	// CREATE AND START BUILD
-	args := DefaultBuildArgs
-	if r.Build.Event == model.EventPull {
-		args = DefaultPullRequestArgs
-	}
+	args := make([]string, len(DefaultBuildArgs))
+	copy(args, DefaultBuildArgs)
 	args = append(args, "--")
 	args = append(args, string(in))
 
