@@ -10,7 +10,7 @@ import (
 
 var (
 	// name of the build agent container.
-	DefaultAgent = "drone/drone-exec:latest"
+	DefaultAgent = "crhym3/drone-exec:latest"
 
 	// default name of the build agent executable
 	DefaultEntrypoint = []string{"/bin/drone-exec"}
